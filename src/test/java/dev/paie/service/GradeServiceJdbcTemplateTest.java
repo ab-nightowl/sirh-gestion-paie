@@ -17,7 +17,7 @@ import dev.paie.entite.Grade;
 import dev.paie.spring.DataSourceMySQLConfig;
 
 //Sélection des classes de configuration Spring à utiliser lors du test
-@ContextConfiguration(classes = { ServicesConfig.class, DataSourceMySQLConfig.class })
+@ContextConfiguration(classes = { GradeServiceJdbcTemplate.class, DataSourceMySQLConfig.class })
 //Configuration JUnit pour que Spring prenne la main sur le cycle de vie du test
 @RunWith(SpringRunner.class)
 public class GradeServiceJdbcTemplateTest {
