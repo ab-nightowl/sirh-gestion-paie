@@ -16,10 +16,10 @@ import dev.paie.entite.ResultatCalculRemuneration;
 
 //Sélection des classes de configuration Spring à utiliser lors du test
 @ContextConfiguration(classes = { ServicesConfig.class, JeuxDeDonneesConfig.class })
-// Configuration JUnit pour que Spring prenne la main sur le cycle de vie du
-// test
+// Configuration JUnit pour que Spring prenne la main sur le cycle de vie du test
 @RunWith(SpringRunner.class)
 public class CalculerRemunerationServiceSimpleTest {
+	
 	@Autowired
 	private CalculerRemunerationService remunerationService;
 	
