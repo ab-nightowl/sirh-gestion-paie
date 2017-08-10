@@ -2,17 +2,40 @@ package dev.paie.entite;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
+@Entity
 public class ProfilRemuneration {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String code;
 
+	@OneToMany
 	private List<Cotisation> cotisationsNonImposables;
 	
+	@OneToMany
 	private List<Cotisation> cotisationsImposables;
 	
+	@OneToMany
 	private List<Avantage> avantages;
+
+	
+	public ProfilRemuneration() {}
+
+	public ProfilRemuneration(Integer id, String code, List<Cotisation> cotisationsNonImposables,
+			List<Cotisation> cotisationsImposables, List<Avantage> avantages) {
+		this.id = id;
+		this.code = code;
+		this.cotisationsNonImposables = cotisationsNonImposables;
+		this.cotisationsImposables = cotisationsImposables;
+		this.avantages = avantages;
+	}
 
 	public Integer getId() {
 		return id;

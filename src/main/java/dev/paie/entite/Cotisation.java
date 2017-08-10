@@ -22,6 +22,17 @@ public class Cotisation {
 	private BigDecimal tauxPatronal;
 	
 	
+	public Cotisation() {}
+	
+	public Cotisation(Integer id, String code, String libelle, BigDecimal tauxSalarial, BigDecimal tauxPatronal) {
+		this.id = id;
+		this.code = code;
+		this.libelle = libelle;
+		this.tauxSalarial = tauxSalarial;
+		this.tauxPatronal = tauxPatronal;
+	}
+
+
 	public String getCode() {
 		return code;
 	}
