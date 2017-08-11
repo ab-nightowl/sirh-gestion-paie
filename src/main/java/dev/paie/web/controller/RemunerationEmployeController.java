@@ -60,8 +60,6 @@ public class RemunerationEmployeController {
 	@RequestMapping(method = RequestMethod.POST, path = "/creer")
 	@Secured("ROLE_ADMINISTRATEUR")
 	public ModelAndView creerEmploye(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		ModelAndView mv = new ModelAndView();
-		
 		String matricule = req.getParameter("matricule");
 		String entrepriseId = req.getParameter("entreprise");
 		String profilRemunerationId = req.getParameter("profil");
@@ -92,8 +90,6 @@ public class RemunerationEmployeController {
 		
 		employeRepo.save(new RemunerationEmploye(matricule, entreprise, profilRemuneration, grade));
 		
-		mv.setViewName("employes/creerEmploye");
-		
-		return mv;
+		return afficherPageCreer();
 	}
 }

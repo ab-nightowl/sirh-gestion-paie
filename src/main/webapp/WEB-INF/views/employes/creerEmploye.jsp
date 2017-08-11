@@ -78,6 +78,7 @@
 
 				<!-- Button -->
 				<div class="form-group">
+					<label class="col-md-4 control-label" for="btn-ajouter"></label>
 					<div class="col-md-4">
 						<button id="btn-ajouter" class="btn btn-primary">Ajouter</button>
 					</div>
