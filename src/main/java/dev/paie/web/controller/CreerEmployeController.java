@@ -27,7 +27,7 @@ import dev.paie.repository.RemunerationEmployeRepository;
 
 @Controller
 @RequestMapping("/employes")
-public class RemunerationEmployeController {
+public class CreerEmployeController {
 	
 	@Autowired
 	private EntrepriseRepository entrepriseRepo;
