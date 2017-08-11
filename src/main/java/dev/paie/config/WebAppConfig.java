@@ -11,7 +11,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebMvc
-@Import(ServicesConfig.class)
+@Import({ServicesConfig.class, SecurityConfig.class})
 @ComponentScan("dev.paie.web.controller")
 @ImportResource({ "classpath:cotisations-imposables.xml", "classpath:cotisations-non-imposables.xml", "classpath:entreprises.xml", "classpath:grades.xml", "classpath:profils-remuneration.xml" })
 public class WebAppConfig {
