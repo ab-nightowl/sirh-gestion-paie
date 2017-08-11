@@ -3,7 +3,9 @@
 <%@page import="dev.paie.entite.ProfilRemuneration"%>
 <%@page import="dev.paie.entite.Grade"%>
 <%@page import="java.util.List"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -23,7 +25,7 @@
 <body>
 	<div class="container">
 
-		<form class="form-horizontal">
+		<form class="form-horizontal" method="POST">
 			<fieldset>
 
 				<!-- Form Name -->
@@ -42,7 +44,7 @@
 				<div class="form-group">
 					<label class="col-md-4 control-label" for="liste-entreprises">Entreprise</label>
 					<div class="col-md-4">
-						<select id="liste-entreprises" name="liste-entreprises" class="form-control">
+						<select id="liste-entreprises" name="entreprise" class="form-control">
 							<c:forEach var="ent" items="${listEnt}">
 								<option value="${ent.id}">${ent.denomination}</option>
 							</c:forEach>
@@ -54,7 +56,7 @@
 				<div class="form-group">
 					<label class="col-md-4 control-label" for="liste-profils">Profil</label>
 					<div class="col-md-4">
-						<select id="liste-profils" name="liste-profils" class="form-control">
+						<select id="liste-profils" name="profil" class="form-control">
 							<c:forEach var="prof" items="${listProfils}">
 								<option value="${prof.id}">${prof.code}</option>
 							</c:forEach>
@@ -66,7 +68,7 @@
 				<div class="form-group">
 					<label class="col-md-4 control-label" for="liste-grades">Grade</label>
 					<div class="col-md-4">
-						<select id="liste-grades" name="liste-grades" class="form-control">
+						<select id="liste-grades" name="grade" class="form-control">
 							<c:forEach var="grade" items="${listGrades}">
 								<option value="${grade.id}">${grade.code}</option>
 							</c:forEach>
@@ -77,15 +79,20 @@
 				<!-- Button -->
 				<div class="form-group">
 					<div class="col-md-4">
-						<button id="btn-ajouter" name="btn-ajouter"
-							class="btn btn-primary">Ajouter</button>
+						<button id="btn-ajouter" class="btn btn-primary">Ajouter</button>
 					</div>
 				</div>
 
 
 			</fieldset>
+			<sec:csrfInput/>
 		</form>
-
+		
+		<!-- en cas d'erreur un paramètre "error" est créé par Spring Security -->
+		<c:if test="${param.error !=null}">
+			Erreur d'authentification
+		</c:if>
+		
 	</div>
 </body>
 </html>

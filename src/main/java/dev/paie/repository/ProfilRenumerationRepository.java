@@ -6,4 +6,6 @@ import dev.paie.entite.ProfilRemuneration;
 
 public interface ProfilRenumerationRepository extends JpaRepository<ProfilRemuneration, Integer> {
 
+	ProfilRemuneration findById(Integer id);
+
 }

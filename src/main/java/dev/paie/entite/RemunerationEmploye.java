@@ -23,9 +23,8 @@ public class RemunerationEmploye {
 	
 	public RemunerationEmploye() {}
 	
-	public RemunerationEmploye(Integer id, String matricule, Entreprise entreprise,
+	public RemunerationEmploye(String matricule, Entreprise entreprise,
 			ProfilRemuneration profilRemuneration, Grade grade) {
-		this.id = id;
 		this.matricule = matricule;
 		this.entreprise = entreprise;
 		this.profilRemuneration = profilRemuneration;

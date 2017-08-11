@@ -6,4 +6,6 @@ import dev.paie.entite.Grade;
 
 public interface GradeRepository extends JpaRepository<Grade, Integer> {
 
+	Grade findById(Integer id);
+
 }

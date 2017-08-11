@@ -1,6 +1,8 @@
 package dev.paie.entite;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,6 +20,7 @@ public class Utilisateur {
 	private String nomUtilisateur;
 	private String motDePasse;
 	private Boolean estActif;
+	@Enumerated(EnumType.STRING)
 	private ROLES role;
 	
 	public Utilisateur() {
