@@ -1,6 +1,7 @@
 package dev.paie.service;
 
 import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Map;
 import java.util.stream.IntStream;
@@ -15,6 +16,7 @@ import dev.paie.entite.Entreprise;
 import dev.paie.entite.Grade;
 import dev.paie.entite.Periode;
 import dev.paie.entite.ProfilRemuneration;
+import dev.paie.entite.RemunerationEmploye;
 import dev.paie.entite.Utilisateur;
 import dev.paie.entite.Utilisateur.ROLES;
 import dev.paie.repository.CotisationRepository;
@@ -22,6 +24,7 @@ import dev.paie.repository.EntrepriseRepository;
 import dev.paie.repository.GradeRepository;
 import dev.paie.repository.PeriodeRepository;
 import dev.paie.repository.ProfilRenumerationRepository;
+import dev.paie.repository.RemunerationEmployeRepository;
 import dev.paie.repository.UtilisateurRepository;
 
 @Service
@@ -34,6 +37,7 @@ public class InitialiserDonneesServiceDev implements InitialiserDonneesService {
 	@Autowired private ProfilRenumerationRepository profilRepo;
 	@Autowired private PeriodeRepository periodeRepo;
 	@Autowired private UtilisateurRepository utilisateurRepo;
+	@Autowired private RemunerationEmployeRepository employeRepo;
 	
 	@Autowired private PasswordEncoder passwordEncoder;
 	
@@ -57,6 +61,7 @@ public class InitialiserDonneesServiceDev implements InitialiserDonneesService {
 		utilisateur2.setRole(ROLES.ROLE_UTILISATEUR);
 		utilisateurRepo.save(utilisateur2);
 		
+		
 		Map<String, Cotisation> beansOfCotisation = context.getBeansOfType(Cotisation.class);
 		beansOfCotisation.values().stream().forEach(cot -> cotisationRepo.save(cot));
 		
@@ -78,6 +83,15 @@ public class InitialiserDonneesServiceDev implements InitialiserDonneesService {
 			periodeRepo.save(p);
 		});
 		
+		employeRepo.save(new RemunerationEmploye("001", entrepriseRepo.findOne(1), profilRepo.findOne(1), gradeRepo.findOne(1), ZonedDateTime.now()));
+		employeRepo.save(new RemunerationEmploye("002", entrepriseRepo.findOne(2), profilRepo.findOne(2), gradeRepo.findOne(2), ZonedDateTime.now()));
+		employeRepo.save(new RemunerationEmploye("003", entrepriseRepo.findOne(3), profilRepo.findOne(3), gradeRepo.findOne(3), ZonedDateTime.now()));
+		employeRepo.save(new RemunerationEmploye("004", entrepriseRepo.findOne(1), profilRepo.findOne(1), gradeRepo.findOne(1), ZonedDateTime.now()));
+		employeRepo.save(new RemunerationEmploye("005", entrepriseRepo.findOne(2), profilRepo.findOne(2), gradeRepo.findOne(2), ZonedDateTime.now()));
+		employeRepo.save(new RemunerationEmploye("006", entrepriseRepo.findOne(3), profilRepo.findOne(3), gradeRepo.findOne(3), ZonedDateTime.now()));
+		employeRepo.save(new RemunerationEmploye("007", entrepriseRepo.findOne(1), profilRepo.findOne(1), gradeRepo.findOne(1), ZonedDateTime.now()));
+		employeRepo.save(new RemunerationEmploye("008", entrepriseRepo.findOne(2), profilRepo.findOne(2), gradeRepo.findOne(2), ZonedDateTime.now()));
+		employeRepo.save(new RemunerationEmploye("009", entrepriseRepo.findOne(3), profilRepo.findOne(3), gradeRepo.findOne(3), ZonedDateTime.now()));
 	}
 
 }

@@ -1,6 +1,7 @@
 package dev.paie.web.controller;
 
 import java.io.IOException;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -27,7 +28,7 @@ import dev.paie.repository.RemunerationEmployeRepository;
 
 @Controller
 @RequestMapping("/employes")
-public class CreerEmployeController {
+public class RemunerationEmployeController {
 	
 	@Autowired
 	private EntrepriseRepository entrepriseRepo;
@@ -74,7 +75,8 @@ public class CreerEmployeController {
 		List<String> paramsNull = Stream.of("matricule", "entreprise", "profil", "grade")
 				.filter(p -> req.getParameter(p) == null).collect(Collectors.toList());
 		
-		if (paramsNull.isEmpty()) {
+		
+		if (paramsNull.isEmpty() && employeRepo.findByMatricule(matricule) == null) {
 			resp.setStatus(201);
 			resp.getWriter().write("Création d’un employé avec les informations suivantes : " 
 					+ "matricule=" + matricule 
@@ -82,14 +84,30 @@ public class CreerEmployeController {
 					+ ", profil=" + profilRemuneration
 					+ ", grade=" + grade
 					);
+			
+			employeRepo.save(new RemunerationEmploye(matricule, entreprise, profilRemuneration, grade, ZonedDateTime.now()));
+
 		} else {
 			resp.setStatus(400);
 			resp.getWriter().write(
 					"Les paramètres suivants sont incorrects : " + String.join(", ", paramsNull));
+			
 		}
-		
-		employeRepo.save(new RemunerationEmploye(matricule, entreprise, profilRemuneration, grade));
-		
-		return afficherPageCreer();
+
+		return afficherPageLister();
 	}
+	
+	@RequestMapping(method = RequestMethod.GET, path = "/lister")
+	@Secured("ROLE_ADMINISTRATEUR")
+	public ModelAndView afficherPageLister() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("employes/listerEmployes");
+		
+		List<RemunerationEmploye> employes = employeRepo.findAll();
+		mv.addObject("listEmployes", employes);
+		
+		return mv;
+	}
+	
+	
 }
