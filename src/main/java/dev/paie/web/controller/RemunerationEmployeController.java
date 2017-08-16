@@ -78,23 +78,18 @@ public class RemunerationEmployeController {
 		
 		if (paramsNull.isEmpty() && employeRepo.findByMatricule(matricule) == null) {
 			resp.setStatus(201);
-			resp.getWriter().write("Création d’un employé avec les informations suivantes : " 
-					+ "matricule=" + matricule 
-					+ ", entreprise=" + entreprise
-					+ ", profil=" + profilRemuneration
-					+ ", grade=" + grade
-					);
 			
 			employeRepo.save(new RemunerationEmploye(matricule, entreprise, profilRemuneration, grade, ZonedDateTime.now()));
-
+			
+			resp.sendRedirect("lister");
+			
+			return afficherPageLister();
 		} else {
 			resp.setStatus(400);
-			resp.getWriter().write(
-					"Les paramètres suivants sont incorrects : " + String.join(", ", paramsNull));
-			
+			ModelAndView mvCreer = afficherPageCreer();
+			mvCreer.addObject("erreurMatricule", matricule);
+			return mvCreer;
 		}
-
-		return afficherPageLister();
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, path = "/lister")

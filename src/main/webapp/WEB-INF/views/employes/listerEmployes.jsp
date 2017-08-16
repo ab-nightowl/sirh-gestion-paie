@@ -23,6 +23,13 @@
 </head>
 <body>
 	<div class="container">
+		
+		<c:if test="${creationEmploye}">
+			<div class="alert alert-success" role="alert">
+				L'employé avec le matricule "${employe.matricule}" a bien été créé.
+			</div>
+		</c:if>
+		
 		<h1>Liste des employés</h1>
 		
 		<div class="row">
@@ -41,9 +48,7 @@
 					<tbody id="tbody">
 						<c:forEach var="employe" items="${listEmployes}">
 							<tr> 
-								<td>${employe.dateHeureCreation.getDayOfMonth()}/${employe.dateHeureCreation.getMonthValue()}/${employe.dateHeureCreation.getYear()} ${employe.dateHeureCreation.getHour()}
-								:${employe.dateHeureCreation.getMinute()}
-								:${employe.dateHeureCreation.getSecond()}
+								<td>${employe.dateHeureCreation.getDayOfMonth()}/${employe.dateHeureCreation.getMonthValue()}/${employe.dateHeureCreation.getYear()} ${employe.dateHeureCreation.getHour()}:${employe.dateHeureCreation.getMinute()}:${employe.dateHeureCreation.getSecond()}
 								</td>
 								<td>${employe.matricule}</td>
 								<td>${employe.grade.code}</td>

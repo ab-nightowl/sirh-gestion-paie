@@ -5,25 +5,33 @@
 <%@page import="java.util.List"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>PAIE - Créer employé</title>
-	<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-	<script
-		src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href='<c:url value="/bootstrap-3.3.7-dist/css/bootstrap.min.css"></c:url>'>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>PAIE - Créer employé</title>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href='<c:url value="/bootstrap-3.3.7-dist/css/bootstrap.min.css"></c:url>'>
 
 </head>
 <body>
 	<div class="container">
-
+		<!-- en cas de matricule indisponible (déjà présent en base de données) -->
+		<c:if test="${erreurMatricule}">
+			<div class="alert alert-danger" role="alert">
+				Matricule "${matricule}" indisponible. Veuillez saisir un nouveau matricule svp.
+			</div>
+		</c:if>
+		
 		<form class="form-horizontal" method="POST">
 			<fieldset>
 
@@ -43,7 +51,8 @@
 				<div class="form-group">
 					<label class="col-md-4 control-label" for="liste-entreprises">Entreprise</label>
 					<div class="col-md-4">
-						<select id="liste-entreprises" name="entreprise" class="form-control">
+						<select id="liste-entreprises" name="entreprise"
+							class="form-control">
 							<c:forEach var="ent" items="${listEnt}">
 								<option value="${ent.id}">${ent.denomination}</option>
 							</c:forEach>
@@ -85,14 +94,14 @@
 
 
 			</fieldset>
-			<sec:csrfInput/>
+			<sec:csrfInput />
 		</form>
-		
+
 		<!-- en cas d'erreur un paramètre "error" est créé par Spring Security -->
 		<c:if test="${param.error !=null}">
 			Erreur d'authentification
 		</c:if>
-		
+
 	</div>
 </body>
 </html>
