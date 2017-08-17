@@ -22,10 +22,6 @@ public class DataSourceMySQLConfig {
 		dataSource.setUrl(url);
 		dataSource.setUsername(username);
 		dataSource.setPassword(password);
-		
-//		dataSource.setUrl("jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1");
-//		dataSource.setUsername("sa");
-//		dataSource.setPassword("");
 
 		return dataSource;
 	}
